@@ -32,8 +32,8 @@ class LoginAdminRequest extends FormRequest
     public function messages()
     {
         return [
-            'email.required' => 'يجب ادخال البريد الالكتروني',
-            'email.email' => 'يجب ادخال صيغة صحيحه للبريد الالكتروني ',
+            'email.required'    => 'يجب ادخال البريد الالكتروني',
+            'email.email'       => 'يجب ادخال صيغة صحيحه للبريد الالكتروني ',
             'password.required' => ' يجب ادخال كلمة المرور ',
         ];
 

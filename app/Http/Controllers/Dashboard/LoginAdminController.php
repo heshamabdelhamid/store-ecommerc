@@ -19,12 +19,13 @@ class LoginAdminController extends Controller
         $remember_me = $request->has('remember_me') ? true : false;
 
         if (auth()->guard('admin')->attempt([
-                'email' => $request->email,
-                'password' => $request->password
-            ], $remember_me)) {
+            'email' => $request->email,
+            'password' => $request->password
+        ], $remember_me)) {
 
             return redirect()->route('admin.index');
         }
+
 
         return redirect()->back()->with(['error' => 'هناك خطأ بابيانات ']);
     }
