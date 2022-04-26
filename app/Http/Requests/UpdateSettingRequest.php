@@ -24,9 +24,9 @@ class UpdateSettingRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'required|exists:admins|numeric',
+            'id' => 'required|exists:settings',
             'value' => 'required',
-            'palin_value' => 'nullable|numeric',
+            'plain_value' => 'nullable|numeric',
         ];
     }
 }

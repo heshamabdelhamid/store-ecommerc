@@ -19,10 +19,10 @@ class SettingsController extends Controller
         if ($type === 'free')
             $shippingmethod = Setting::where('key', 'free_shipping_label')->first();
 
-        elseif ($type == 'inner')
+        elseif ($type === 'inner')
             $shippingmethod = Setting::where('key', 'local_label')->first();
 
-        elseif ($type == 'outer')
+        elseif ($type === 'outer')
             $shippingmethod = Setting::where('key', 'outer_shipping_label')->first();
 
         // else ' sorry this shipping not found '; //make view errors sittings
