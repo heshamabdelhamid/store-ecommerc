@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreAdminRequest extends FormRequest
+class UpdateAdminProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class StoreAdminRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class StoreAdminRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required',
+            'email' => 'required|email|unique:admins,email,' . auth('admin')->user()->id,
+            'password'  => 'nullable|confirmed|min:8'
         ];
     }
 }

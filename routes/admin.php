@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Dashboard\AdminController;
-use App\Http\Controllers\Dashboard\LoginAdminController;
+use App\Http\Controllers\Dashboard\Admin\AdminController;
+use App\Http\Controllers\Dashboard\Admin\AdminProfile;
+use App\Http\Controllers\Dashboard\Authentication\LoginAdminController;
+use App\Http\Controllers\Dashboard\Authentication\LogoutAdminController;
 use App\Http\Controllers\Dashboard\Settings\SettingsController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -32,6 +34,7 @@ Route::group(
         Route::group(['middleware' => 'auth:admin', 'prefix' => 'admin'], function () {
 
             Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+            Route::get('logout', [LogoutAdminController::class, 'logout'])->name('admin.logout');
 
             Route::group(['prefix' => 'settings'], function () {
 
@@ -40,6 +43,20 @@ Route::group(
 
                 Route::put('shippings-methods/{id}', [SettingsController::class, 'updateShippingsMethods'])
                     ->name('update.shippings.method');
+            });
+
+            Route::group(['prefix' => 'profile'], function () {
+
+                Route::get('update', [AdminProfile::class, 'getAdminProfile'])
+                    ->name('get.admin.profile');
+
+                Route::put('update', [AdminProfile::class, 'updateAdminProfile'])
+                    ->name('update.admin.profile');
+
+                // Route::controller(OrderController::class)->group(function () {
+                //     Route::get('/orders/{id}', 'show');
+                //     Route::post('/orders', 'store');
+                // });
             });
         });
     }

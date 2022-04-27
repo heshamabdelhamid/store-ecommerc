@@ -76,7 +76,7 @@
                                                             <input type="text" value=" {{ $shippingmethod->value }} "
                                                                 id="name" class="form-control" placeholder="  "
                                                                 name="value">
-                                                            @error('name')
+                                                            @error('value')
                                                                 <span class="text-danger">{{ $message }}</span>
                                                             @enderror
                                                         </div>
@@ -87,7 +87,7 @@
                                                             <label for="projectinput1"> قيمة التوصيل </label>
                                                             <input type="number" value="{{ $shippingmethod->plain_value }}" id="name" class="form-control"
                                                                 placeholder="" name="plain_value">
-                                                            @error('name')
+                                                            @error('plain_value')
                                                                 <span class="text-danger">{{ $message }}</span>
                                                             @enderror
                                                         </div>
