@@ -47,7 +47,7 @@ Route::group(
 
             Route::group(['prefix' => 'profile'], function () {
 
-                Route::get('update', [AdminProfile::class, 'getAdminProfile'])
+                Route::get('edit', [AdminProfile::class, 'getAdminProfile'])
                     ->name('get.admin.profile');
 
                 Route::put('update', [AdminProfile::class, 'updateAdminProfile'])
