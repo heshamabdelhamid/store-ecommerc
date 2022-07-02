@@ -14,5 +14,8 @@ return [
     */
 
     'settings' => 'الاعدادات',
-
+    'delivery_means' => 'وسائل التوصيل',
+    'free_delivery' => 'توصيل مجاني ',
+    'internal_delivery' => 'توصيل داخلي ',
+    'external_delivery' => 'توصيل خارجي ',
 ];
