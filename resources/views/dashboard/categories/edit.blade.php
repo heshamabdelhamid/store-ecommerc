@@ -1,7 +1,5 @@
 @extends('layouts.admin')
 @section('content')
-    {{-- @include('dashboard.includes.alerts.success') --}}
-
     <div class="app-content content">
         <div class="content-wrapper">
             <div class="content-header row">
@@ -9,11 +7,11 @@
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href=" {{ route('admin.index') }} ">الرئيسية </a>
+                                <li class="breadcrumb-item"><a href="">الرئيسية </a>
                                 </li>
-                                {{-- <li class="breadcrumb-item"><a href="">المتاجر </a>
-                                </li> --}}
-                                <li class="breadcrumb-item active"> وسائل التوصيل
+                                <li class="breadcrumb-item"><a href=""> الاقسام الرئيسية </a>
+                                </li>
+                                <li class="breadcrumb-item active"> تعديل - {{ $category->name }}
                                 </li>
                             </ol>
                         </div>
@@ -27,7 +25,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form"> تعديل وسيلة التوصيل </h4>
+                                    <h4 class="card-title" id="basic-layout-form"> تعديل قسم رئيسي </h4>
                                     <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
                                         <ul class="list-inline mb-0">
@@ -43,40 +41,44 @@
                                 <div class="card-content collapse show">
                                     <div class="card-body">
                                         <form class="form"
-                                            action="{{ route('update.shippings.method', $shippingmethod->id) }}"
-                                            method="post" enctype="multipart/form-data">
-                                            @csrf
-                                            @method('PUT')
+                                            action="{{ route('admin.main-category.update', $category->id) }}"
+                                            method="POST" enctype="multipart/form-data">
+                                                @method('PUT')
+                                                @csrf
 
-                                            {{-- <input type="hidden" name="id" value=" {{ $shippingmethod->id }} "> --}}
-                                            {{-- <input type="hidden" value="" id="latitude" name="latitude">
-                                            <input type="hidden" value="" id="longitude" name="longitude"> --}}
+                                            <input name="id" value="{{ $category->id }}" type="hidden">
+
+                                            <div class="form-group">
+                                                <div class="text-center">
+                                                    <img src="" class="rounded-circle  height-150"
+                                                        alt="صورة القسم  ">
+                                                </div>
+                                            </div>
 
 
-                                            {{-- <div class="form-group">
-                                                <label> لوجو التجار </label>
+                                            <div class="form-group">
+                                                <label> صوره القسم </label>
                                                 <label id="projectinput7" class="file center-block">
-                                                    <input type="file" id="file" name="logo">
+                                                    <input type="file" id="file" name="photo">
                                                     <span class="file-custom"></span>
                                                 </label>
-                                                @error('logo')
+                                                @error('photo')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
-                                            </div> --}}
+                                            </div>
 
                                             <div class="form-body">
 
-                                                <h4 class="form-section"><i class="ft-home"></i> بيانات وسيلة
-                                                    التوصيل </h4>
-
+                                                <h4 class="form-section"><i class="ft-home"></i> بيانات القسم </h4>
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="projectinput1"> الاسم </label>
-                                                            <input type="text" value=" {{ $shippingmethod->value }} "
-                                                                id="name" class="form-control" placeholder="  "
-                                                                name="value">
-                                                            @error('value')
+                                                            <label for="projectinput1"> اسم القسم
+                                                            </label>
+                                                            <input type="text" id="name" class="form-control"
+                                                                placeholder="  " value="{{ $category->name }}"
+                                                                name="name">
+                                                            @error('name')
                                                                 <span class="text-danger">{{ $message }}</span>
                                                             @enderror
                                                         </div>
@@ -84,37 +86,34 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="projectinput1"> قيمة التوصيل </label>
-                                                            <input type="number" value="{{ $shippingmethod->plain_value }}" id="name" class="form-control"
-                                                                placeholder="" name="plain_value">
-                                                            @error('plain_value')
+                                                            <label for="projectinput1"> اسم بالرابط
+                                                            </label>
+                                                            <input type="text" id="name" class="form-control"
+                                                                placeholder="  " value="{{ $category->slug }}"
+                                                                name="slug">
+                                                            @error('slug')
                                                                 <span class="text-danger">{{ $message }}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
 
                                                 </div>
-
-                                                {{-- <div class="row">
+                                                <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group mt-1">
-                                                            <input type="checkbox" value="1" name="active"
-                                                                id="switcheryColor4" class="switchery"
-                                                                data-color="success">
+                                                            <input type="checkbox" value="1" name="is_active"
+                                                                id="switcheryColor4" class="switchery" data-color="success"
+                                                                @if ($category->is_active == 1) checked @else value="0" @endif />
                                                             <label for="switcheryColor4" class="card-title ml-1">الحالة
                                                             </label>
 
-                                                            @error('active')
-                                                                <span class="text-danger"> </span>
+                                                            @error('is_active')
+                                                                <span class="text-danger">{{ $message }}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
-                                                </div> --}}
-
+                                                </div>
                                             </div>
-
-
-                                            {{-- <div id="map" style="height: 500px;width: 1000px;"></div> --}}
 
                                             <div class="form-actions">
                                                 <button type="button" class="btn btn-warning mr-1"
@@ -122,10 +121,11 @@
                                                     <i class="ft-x"></i> تراجع
                                                 </button>
                                                 <button type="submit" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i> حفظ
+                                                    <i class="la la-check-square-o"></i> تحديث
                                                 </button>
                                             </div>
                                         </form>
+
                                     </div>
                                 </div>
                             </div>

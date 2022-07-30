@@ -6,7 +6,7 @@
                         data-i18n="nav.add_on_drag_drop.main">الرئيسية </span></a>
             </li>
 
-            <li class="nav-item  open ">
+            {{-- <li class="nav-item  open ">
                 <a href=""><i class="la la-home"></i>
                     <span class="menu-title" data-i18n="nav.dash.main">لغات الموقع </span>
                     <span class="badge badge badge-info badge-pill float-right mr-2"></span>
@@ -19,18 +19,21 @@
                             لغة جديده </a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
 
 
             <li class="nav-item"><a href=""><i class="la la-group"></i>
                     <span class="menu-title" data-i18n="nav.dash.main">الاقسام الرئيسيه </span>
-                    <span class="badge badge badge-danger badge-pill float-right mr-2"></span>
+                    <span class="badge badge badge-danger badge-pill float-right mr-2">
+                        {{ \App\Models\Category::Parent()->count() }} </span>
                 </a>
                 <ul class="menu-content">
-                    <li class="active"><a class="menu-item" href="" data-i18n="nav.dash.ecommerce"> عرض
+                    <li class="active"><a class="menu-item" href="{{ route('admin.main-category.index') }}"
+                            data-i18n="nav.dash.ecommerce"> عرض
                             الكل </a>
                     </li>
-                    <li><a class="menu-item" href="" data-i18n="nav.dash.crypto">أضافة
+                    <li><a class="menu-item" href="{{ route('admin.main-category.create') }}"
+                            data-i18n="nav.dash.crypto">أضافة
                             قسم جديد </a>
                     </li>
                 </ul>
@@ -50,7 +53,7 @@
                 </ul>
             </li>
 
-            <li class="nav-item"><a href=""><i class="la la-male"></i>
+            {{-- <li class="nav-item"><a href=""><i class="la la-male"></i>
                     <span class="menu-title" data-i18n="nav.dash.main">المتاجر </span>
                     <span class="badge badge badge-success badge-pill float-right mr-2">)</span>
                 </a>
@@ -62,10 +65,10 @@
                             متجر </a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
 
 
-            <li class="nav-item"><a href=""><i class="la la-male"></i>
+            {{-- <li class="nav-item"><a href=""><i class="la la-male"></i>
                     <span class="menu-title" data-i18n="nav.dash.main">الطلاب </span>
                     <span class="badge badge badge-warning  badge-pill float-right mr-2"></span>
                 </a>
@@ -77,10 +80,10 @@
                             طالب </a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
 
 
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a href=""><i class="la la-male"></i>
                     <span class="menu-title" data-i18n="nav.dash.main">تذاكر المراسلات </span>
                     <span class="badge badge badge-danger  badge-pill float-right mr-2">0</span>
@@ -90,30 +93,34 @@
                             الطلاب </a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
 
 
             <li class=" nav-item"><a href="#"><i class="la la-television"></i><span class="menu-title"
-                        data-i18n="nav.templates.main"> {{__('admin/sidebar.settings')}}</span></a>
+                        data-i18n="nav.templates.main"> {{ __('admin/sidebar.settings') }}</span></a>
                 <ul class="menu-content">
-                    <li><a class="menu-item" href="#" data-i18n="nav.templates.vert.main">وسائل التوصيل </a>
+                    <li><a class="menu-item" href="#"
+                            data-i18n="nav.templates.vert.main">{{ __('admin/sidebar.delivery_means') }} </a>
                         <ul class="menu-content">
                             <li>
                                 <a class="menu-item" href=" {{ route('get.shippings.method', 'free') }} "
-                                    data-i18n="nav.templates.vert.classic_menu"> توصيل مجاني </a>
+                                    data-i18n="nav.templates.vert.classic_menu">
+                                    {{ __('admin/sidebar.free_delivery') }}</a>
                             </li>
                             <li>
-                                <a class="menu-item" href=" {{ route('get.shippings.method', 'inner') }} ">توصيل
-                                    داخلي </a>
+                                <a class="menu-item"
+                                    href=" {{ route('get.shippings.method', 'inner') }} ">{{ __('admin/sidebar.internal_delivery') }}</a>
                             </li>
                             <li><a class="menu-item" href=" {{ route('get.shippings.method', 'outer') }} "
-                                    data-i18n="nav.templates.vert.compact_menu"> توصيل خارجي </a>
+                                    data-i18n="nav.templates.vert.compact_menu">{{ __('admin/sidebar.external_delivery') }}
+                                </a>
                             </li>
                         </ul>
                     </li>
                 </ul>
             </li>
-            <li class=" navigation-header">
+
+            {{-- <li class=" navigation-header">
                 <span data-i18n="nav.category.layouts">Layouts</span><i class="la la-ellipsis-h ft-minus"
                     data-toggle="tooltip" data-placement="right" data-original-title="Layouts"></i>
             </li>
@@ -1611,7 +1618,7 @@
                         class="la la-text-height"></i>
                     <span class="menu-title" data-i18n="nav.support_documentation.main">Documentation</span>
                 </a>
-            </li>
+            </li> --}}
         </ul>
     </div>
 </div>

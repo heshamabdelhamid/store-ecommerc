@@ -14,6 +14,10 @@ return [
     */
 
     'settings' => 'Settings',
+    'delivery_means' => 'Delivery Means',
+    'free_delivery' => 'Free Delivery',
+    'internal_delivery' => 'Internal Delivery',
+    'external_delivery' => 'External Delivery',
 
 
 ];
