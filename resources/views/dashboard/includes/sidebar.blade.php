@@ -3,7 +3,7 @@
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
 
             <li class="nav-item active"><a href=""><i class="la la-mouse-pointer"></i><span class="menu-title"
-                        data-i18n="nav.add_on_drag_drop.main">الرئيسية </span></a>
+                        data-i18n="nav.add_on_drag_drop.main"> {{ __('admin/sidebar.home_page') }} </span></a>
             </li>
 
             {{-- <li class="nav-item  open ">
@@ -23,32 +23,37 @@
 
 
             <li class="nav-item"><a href=""><i class="la la-group"></i>
-                    <span class="menu-title" data-i18n="nav.dash.main">الاقسام الرئيسيه </span>
-                    <span class="badge badge badge-danger badge-pill float-right mr-2">
-                        {{ \App\Models\Category::Parent()->count() }} </span>
+                    <span class="menu-title" data-i18n="nav.dash.main"> {{ __('admin/category.main_categories') }} </span>
+                    @if (\App\Models\MainCategory::count() > 0)
+                        <span class="badge badge badge-danger badge-pill float-right mr-2">
+                            {{ \App\Models\MainCategory::count() }}
+                        </span>
+                    @endif
                 </a>
                 <ul class="menu-content">
                     <li class="active"><a class="menu-item" href="{{ route('admin.main-category.index') }}"
-                            data-i18n="nav.dash.ecommerce"> عرض
-                            الكل </a>
+                            data-i18n="nav.dash.ecommerce"> {{ __('admin/category.show_all') }} </a>
                     </li>
                     <li><a class="menu-item" href="{{ route('admin.main-category.create') }}"
-                            data-i18n="nav.dash.crypto">أضافة
-                            قسم جديد </a>
+                            data-i18n="nav.dash.crypto">{{ __('admin/category.add_new_category') }}</a>
                     </li>
                 </ul>
             </li>
 
             <li class="nav-item"><a href=""><i class="la la-group"></i>
-                    <span class="menu-title" data-i18n="nav.dash.main">الاقسام الفرعية </span>
-                    <span class="badge badge badge-danger badge-pill float-right mr-2">400</span>
+                    <span class="menu-title" data-i18n="nav.dash.main"> {{ __('admin/category.sub_categories') }} </span>
+                    @if (\App\Models\SubCategory::count() > 0)
+                        <span class="badge badge badge-danger badge-pill float-right mr-2">
+                            {{ \App\Models\SubCategory::count() }}
+                        </span>
+                    @endif
                 </a>
                 <ul class="menu-content">
-                    <li class="active"><a class="menu-item" href="" data-i18n="nav.dash.ecommerce"> عرض
-                            الكل </a>
+                    <li class="active"><a class="menu-item" href="{{ route('admin.sub-category.index') }}"
+                            data-i18n="nav.dash.ecommerce"> {{ __('admin/category.show_all') }} </a>
                     </li>
-                    <li><a class="menu-item" href="" data-i18n="nav.dash.crypto">أضافة
-                            قسم فرعي جديد </a>
+                    <li><a class="menu-item" href="{{ route('admin.sub-category.create') }}"
+                            data-i18n="nav.dash.crypto"> {{ __('admin/category.add_new_category') }} </a>
                     </li>
                 </ul>
             </li>

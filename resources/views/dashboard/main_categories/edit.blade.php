@@ -41,11 +41,10 @@
                                 <div class="card-content collapse show">
                                     <div class="card-body">
                                         <form class="form"
-                                            action="{{ route('admin.main-category.update', $category->id) }}"
-                                            method="POST" enctype="multipart/form-data">
-                                                @method('PUT')
-                                                @csrf
-
+                                            action="{{ route('admin.main-category.update', $category->id) }}" method="POST"
+                                            enctype="multipart/form-data">
+                                            @method('PUT')
+                                            @csrf
                                             <input name="id" value="{{ $category->id }}" type="hidden">
 
                                             <div class="form-group">
@@ -54,7 +53,6 @@
                                                         alt="صورة القسم  ">
                                                 </div>
                                             </div>
-
 
                                             <div class="form-group">
                                                 <label> صوره القسم </label>
@@ -76,8 +74,7 @@
                                                             <label for="projectinput1"> اسم القسم
                                                             </label>
                                                             <input type="text" id="name" class="form-control"
-                                                                placeholder="  " value="{{ $category->name }}"
-                                                                name="name">
+                                                                placeholder="" value="{{ $category->name }}" name="name">
                                                             @error('name')
                                                                 <span class="text-danger">{{ $message }}</span>
                                                             @enderror
@@ -103,7 +100,7 @@
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox" value="1" name="is_active"
                                                                 id="switcheryColor4" class="switchery" data-color="success"
-                                                                @if ($category->is_active == 1) checked @else value="0" @endif />
+                                                                @if ($category->is_active == 1) checked @endif />
                                                             <label for="switcheryColor4" class="card-title ml-1">الحالة
                                                             </label>
 

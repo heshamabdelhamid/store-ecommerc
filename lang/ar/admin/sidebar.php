@@ -13,6 +13,7 @@ return [
     |
     */
 
+    'home_page' => 'الرئيسية',
     'settings' => 'الاعدادات',
     'delivery_means' => 'وسائل التوصيل',
     'free_delivery' => 'توصيل مجاني ',

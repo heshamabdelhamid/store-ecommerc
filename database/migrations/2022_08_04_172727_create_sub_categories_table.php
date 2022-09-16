@@ -13,12 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('sub_categories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->unsignedBigInteger('main_category_id')->nullable();
             $table->string('slug')->unique();
             $table->boolean('is_active');
-            $table->foreign('parent_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->string('photo')->nullable();
+            $table->foreign('main_category_id')->references('id')->on('main_categories')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('sub_categories');
     }
 };

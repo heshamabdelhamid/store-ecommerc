@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Dashboard\Categories;
 
-use App\Models\MainCategory;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Category\StoreMainCategoryRequest;
-use App\Http\Requests\Category\UpdateMainCategoryRequest;
+use App\Http\Requests\Category\StoreSubCategoryRequest;
+use App\Http\Requests\Category\UpdateSubCategoryRequest;
+use App\Models\MainCategory;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
-class MainCategoryController extends Controller
+class SubCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +18,8 @@ class MainCategoryController extends Controller
      */
     public function index()
     {
-        $categories = MainCategory::orderBy('id', 'DESC')->get();
-        return view('dashboard.main_categories.index', compact('categories'));
+        $categories = SubCategory::orderBy('id', 'DESC')->get();
+        return view('dashboard.sub_categories.index', compact('categories'));
     }
 
     /**
@@ -28,7 +29,8 @@ class MainCategoryController extends Controller
      */
     public function create()
     {
-        return view('dashboard.main_categories.create');
+        $categories = MainCategory::select('id')->get();
+        return view('dashboard.sub_categories.create', compact('categories'));
     }
 
     /**
@@ -37,27 +39,16 @@ class MainCategoryController extends Controller
      * @param  \App\Http\Requests\StoreCategoryRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreMainCategoryRequest $request)
+    public function store(StoreSubCategoryRequest $request)
     {
         try {
-
-            // check photo exists
-            $request_data = $request->except(['photo']);
-
-            if ($request->photo) {
-                $file_name = $this->saveImage($request->photo, 'images/main-category');
-                $request_data['photo'] = $file_name;
-            }
 
             if (!$request->is_active)
                 $request->request->add(['is_active' => 0]);
 
-            dd($request_data);
-            MainCategory::create($request_data);
+            SubCategory::create($request->all());
             return redirect()->back()->with(['success' => 'تم التحديث بنجاح']);
-            // DB::commit();
         } catch (\Exception $ex) {
-            // DB::rollback();
             return redirect()->route('admin.main-category.store')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
         }
     }
@@ -70,12 +61,12 @@ class MainCategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = MainCategory::find($id);
-
+        $category = SubCategory::find($id);
+        $main_categories = MainCategory::select('id')->get();
         if (!$category)
             return redirect()->back()->with(['error' => 'not found ']);
 
-        return view('dashboard.main_categories.edit', compact('category'));
+        return view('dashboard.sub_categories.edit', compact('category', 'main_categories'));
     }
 
     /**
@@ -85,10 +76,10 @@ class MainCategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateMainCategoryRequest $request)
+    public function update(UpdateSubCategoryRequest $request)
     {
         try {
-            $category = MainCategory::find($request->id);
+            $category = SubCategory::find($request->id);
 
             if (!$request->is_active)
                 $request->request->add(['is_active' => 0]);
@@ -110,7 +101,7 @@ class MainCategoryController extends Controller
     public function destroy(Request $request)
     {
         try {
-            MainCategory::FindOrFail($request->id)->delete();
+            SubCategory::FindOrFail($request->id)->delete();
             return redirect()->back()->with(['success' => 'تم الحذف بنجاح']);
         } catch (\Exception $ex) {
             return redirect()->back()->with(['error' => 'هناك خطا ما يرجي المحاولة فيما بعد']);

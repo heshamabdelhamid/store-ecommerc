@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard\Admin\AdminProfile;
 use App\Http\Controllers\Dashboard\Authentication\LoginAdminController;
 use App\Http\Controllers\Dashboard\Authentication\LogoutAdminController;
 use App\Http\Controllers\Dashboard\Categories\MainCategoryController;
+use App\Http\Controllers\Dashboard\Categories\SubCategoryController;
 use App\Http\Controllers\Dashboard\Settings\SettingsController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -52,7 +53,7 @@ Route::group(
                 Route::put('update', [AdminProfile::class, 'updateAdminProfile'])->name('update.admin.profile');
             });
 
-            /////////////////////// Route Main_Categories && Sub_Categories ///////////////////////
+            /////////////////////// Route Main_Categories  ///////////////////////
             Route::group(['prefix' => 'main-categories'], function () {
                 Route::get('/', [MainCategoryController::class, 'index'])->name('admin.main-category.index');
                 Route::get('create', [MainCategoryController::class, 'create'])->name('admin.main-category.create');
@@ -60,6 +61,16 @@ Route::group(
                 Route::get('edit/{id}', [MainCategoryController::class, 'edit'])->name('admin.main-category.edit');
                 Route::PUT('update', [MainCategoryController::class, 'update'])->name('admin.main-category.update');
                 Route::DELETE('delete', [MainCategoryController::class, 'destroy'])->name('admin.main-category.delete');
+            });
+
+            /////////////////////// Route Main_Categories  ///////////////////////
+            Route::group(['prefix' => 'sub-categories'], function () {
+                Route::get('/', [SubCategoryController::class, 'index'])->name('admin.sub-category.index');
+                Route::get('create', [SubCategoryController::class, 'create'])->name('admin.sub-category.create');
+                Route::post('store', [SubCategoryController::class, 'store'])->name('admin.sub-category.store');
+                Route::get('edit/{id}', [SubCategoryController::class, 'edit'])->name('admin.sub-category.edit');
+                Route::PUT('update', [SubCategoryController::class, 'update'])->name('admin.sub-category.update');
+                Route::DELETE('delete', [SubCategoryController::class, 'destroy'])->name('admin.sub-category.delete');
             });
         });
     }

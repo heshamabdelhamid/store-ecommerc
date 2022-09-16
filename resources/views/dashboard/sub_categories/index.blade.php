@@ -58,17 +58,17 @@
                                                     @foreach ($categories as $category)
                                                         <tr>
                                                             <td>{{ $category->name }}</td>
-                                                            <td>{{ $category->_parent->name ?? '--' }}</td>
+                                                            <td>{{ $category->mainCategory->name ?? '--' }}</td>
                                                             <td>{{ $category->slug }}</td>
                                                             <td>{{ $category->getActive() }}</td>
                                                             <td> <img style="width: 150px; height: 100px;" src=" "></td>
                                                             <td>
                                                                 <div class="btn-group" role="group"
                                                                     aria-label="Basic example">
-                                                                    <a href="{{ route('admin.main-category.edit', $category->id) }}"
+                                                                    <a href="{{ route('admin.sub-category.edit', $category->id) }}"
                                                                         class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">تعديل</a>
 
-                                                                    <form action="{{ route('admin.main-category.delete') }}"
+                                                                    <form action="{{ route('admin.sub-category.delete') }}"
                                                                         method="post" enctype="multipart/form-data">
                                                                         @method('delete')
                                                                         @csrf

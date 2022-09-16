@@ -13,11 +13,16 @@ return [
     |
     */
 
+    'home_page' => 'Homepage',
     'settings' => 'Settings',
     'delivery_means' => 'Delivery Means',
     'free_delivery' => 'Free Delivery',
     'internal_delivery' => 'Internal Delivery',
     'external_delivery' => 'External Delivery',
+    'main_categories' => 'Main Categories',
+    'sub_categories' => 'Sub Categories',
+    'show_all' => 'Show All',
+    'add_new_category' => 'Add New Category',
 
 
 ];

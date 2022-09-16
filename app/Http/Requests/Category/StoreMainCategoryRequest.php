@@ -25,8 +25,8 @@ class StoreMainCategoryRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'type' => 'required|in:1,2',
-            'slug' => 'required|unique:categories'
+            // 'type' => 'required|in:1,2',
+            'slug' => 'required|unique:main_categories'
         ];
     }
 }
